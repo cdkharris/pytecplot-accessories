@@ -12,18 +12,24 @@ def load_layout_save(layout_path,save_path,annotation=''):
     E.G. if the layout loads a file called "./data.plt" then you can copy the
     layout into any directory which has a file named "./data.plt". Then use this
     function to make a plot of that data.
+    The function will save images as EPS or PNG depending on the file extension
+    used in save_path. The default is PNG.
 
     Keyword Arguments
     ---
     layout_path: the path to the layout file
-    save_path  : the pathname of the image to save (png)
+    save_path  : the pathname of the image to save
     annotation : (optional) a string which will be printed in the upper left
                  corner of the plot
     """
     tecplot.load_layout(layout_path)
     frame = tecplot.active_frame()
     frame.add_text(annotation,position=(7,93), size=20)
-    tecplot.export.save_png(save_path,width=1200,supersample=8)
+    ext = save_path.split('.')[-1]
+    if ext == 'eps':
+        tecplot.export.save_eps(save_path)
+    else:
+        tecplot.export.save_png(save_path,width=1200,supersample=8)
     print('Saved '+save_path)
 
 
@@ -31,6 +37,9 @@ def load_eqn_frame_save(dataset_path,eqn_path,frame_styles,save_paths,annotation
     """
     Load the data, run an equations file, run a set of frame styles, and export
     the plots.
+    The function will save images as EPS or PNG depending on the file extension
+    used in save_path. The default is PNG.
+    
     Keyword Arguments
     ---
     dataset_path: the path to the dataset (plt)
@@ -60,5 +69,9 @@ def load_eqn_frame_save(dataset_path,eqn_path,frame_styles,save_paths,annotation
         frame.add_text(annotation,position=(7,93), size=20)
         print('Applied '+frame_styles[i])
         ## export the plot
-        tecplot.export.save_png(save_paths[i],width=1200,supersample=8)
+        ext = save_paths[i].split('.')[-1]
+        if ext == 'eps':
+            tecplot.export.save_eps(save_paths[i])
+        else:
+            tecplot.export.save_png(save_paths[i],width=1200,supersample=8)
         print('Saved '+save_paths[i])
