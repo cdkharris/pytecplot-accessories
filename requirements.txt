@@ -1,0 +1,4 @@
+## can be passed to pip like
+#### pip install -r requirements.txt
+
+pytecplot >= 1.0
