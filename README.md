@@ -18,3 +18,9 @@ Instructions for installing pytecplot.
 
 ## runintecplot.md
 Instructions for running python scripts which use tecplot.
+
+## tp_interpolate.py
+A script for interpolating 3d PLT data onto a uniform cartesian grid, then reformatting and saving the data in HDF5 format. Greatly reduces file size due to reduced number of points.
+
+## tp_reformat.py
+A script for reformatting and saving 3d PLT data as HDF5, preserving auxiliary data and the nodemap. Similar file size to the original PLT.
